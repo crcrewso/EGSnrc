@@ -173,7 +173,7 @@ echo >&2;
 printf $format "Looking for available fortran compilers ... " >&2
 f_compilers=
 f_first=
-for fc_prog in gfortran g77 f77 xlf cf77 cft77 frt pgf77 fl32 af77 fort77 f90 xlf90 pgf90 epcf90 f95 fort xlf95 lf95 g95 asf77 ifort; do
+for fc_prog in gfortran g77 f77 xlf cf77 cft77 frt pgf77 fl32 af77 fort77 f90 xlf90 pgf90 epcf90 f95 fort xlf95 lf95 g95 asf77 ifort flang; do
     save_IFS=$IFS; IFS=$path_separator;
     dummy="$PATH"
     for fc_dir in $dummy; do
