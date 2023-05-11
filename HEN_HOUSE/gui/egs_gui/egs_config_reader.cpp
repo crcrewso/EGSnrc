@@ -87,7 +87,7 @@ EGS_PrivateConfigReader::EGS_PrivateConfigReader(const QString &file) {
 QString EGS_PrivateConfigReader::ironIt(const QString &v) {
     QString aux = "/+|"; aux += "\\\\"; aux += "+";
     QRegExp re(aux);
-    QStringList list = v.split(re,QString::SkipEmptyParts);
+    QStringList list = v.split(re,Qt::SkipEmptyParts);
 #ifdef CR_DEBUG
     cr_debug << "ironIt gets " << list.count() << " elements :" << list.join(",").toLatin1().data() << endl;
 #endif
