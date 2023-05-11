@@ -239,7 +239,7 @@ void createDir( QString dir){ createDir( dir, false, QString() );}
   QFile        *config_file;
   QProcess     *procInstall;
   EGSThread    *t;
-  QTime         the_time;
+  QElapsedTimer    the_time;
   QString       installationDir,
                 egsBinDir,
                 homeBinDir,
