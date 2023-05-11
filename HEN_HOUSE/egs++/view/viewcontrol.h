@@ -154,7 +154,7 @@ private:
     QString filename_tracks;
     QString userDoseFile;
     int nmed;
-    QRgb *m_colors;
+    QColor *m_colors;
     QColor  backgroundColor,
             textColor,
             axisColor,

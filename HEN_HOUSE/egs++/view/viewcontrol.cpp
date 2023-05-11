@@ -474,83 +474,83 @@ void GeometryViewControl::saveConfig() {
     RenderParameters &rp = gview->pars;
 
     // General window settings
-    out << ":start general:" << endl;
-    out << "    font size = " << this->font().pointSize() << endl;
-    out << "    controls position = " << this->x() << " " << this->y() << endl;
-    out << "    controls size = " << this->width() << " " << this->height() << endl;
-    out << "    view position = " << gview->x() << " " << gview->y() << endl;
-    out << "    view size = " << gview->width() << " " << gview->height() << endl;
-    out << ":stop general:" << endl;
+    out << ":start general:" << Qt::endl;
+    out << "    font size = " << this->font().pointSize() << Qt::endl;
+    out << "    controls position = " << this->x() << " " << this->y() << Qt::endl;
+    out << "    controls size = " << this->width() << " " << this->height() << Qt::endl;
+    out << "    view position = " << gview->x() << " " << gview->y() << Qt::endl;
+    out << "    view size = " << gview->width() << " " << gview->height() << Qt::endl;
+    out << ":stop general:" << Qt::endl;
 
-    out << ":start camera view:" << endl;
+    out << ":start camera view:" << Qt::endl;
     out << "    rotation point = " << lookX->text() << " "
         << lookY->text() << " "
-        << lookZ->text() << endl;
+        << lookZ->text() << Qt::endl;
     out << "    camera = " << camera.x << " "
         << camera.y << " "
-        << camera.z << endl;
+        << camera.z << Qt::endl;
     out << "    camera v1 = " << camera_v1.x << " "
         << camera_v1.y << " "
-        << camera_v1.z << endl;
+        << camera_v1.z << Qt::endl;
     out << "    camera v2 = " << camera_v2.x << " "
         << camera_v2.y << " "
-        << camera_v2.z << endl;
-    out << "    zoom = " << zoomlevel << endl;
-    out << ":stop camera view:" << endl;
+        << camera_v2.z << Qt::endl;
+    out << "    zoom = " << zoomlevel << Qt::endl;
+    out << ":stop camera view:" << Qt::endl;
 
-    out << ":start home view:" << endl;
+    out << ":start home view:" << Qt::endl;
     out << "    home position = " << look_at_home.x << " "
         << look_at_home.y << " "
-        << look_at_home.z << endl;
+        << look_at_home.z << Qt::endl;
     out << "    home = " << camera_home.x << " "
         << camera_home.y << " "
-        << camera_home.z << endl;
+        << camera_home.z << Qt::endl;
     out << "    home v1 = " << camera_home_v1.x << " "
         << camera_home_v1.y << " "
-        << camera_home_v1.z << endl;
+        << camera_home_v1.z << Qt::endl;
     out << "    home v2 = " << camera_home_v2.x << " "
         << camera_home_v2.y << " "
-        << camera_home_v2.z << endl;
-    out << "    zoom = " << zoomlevel_home << endl;
-    out << ":stop home view:" << endl;
+        << camera_home_v2.z << Qt::endl;
+    out << "    zoom = " << zoomlevel_home << Qt::endl;
+    out << ":stop home view:" << Qt::endl;
 
-    out << ":start tracks:" << endl;
-    out << "    show tracks = " << showTracks << endl;
-    out << "    photons = " << showPhotonTracks << endl;
-    out << "    electrons = " << showElectronTracks << endl;
-    out << "    positrons = " << showPositronTracks << endl;
-    out << ":stop tracks:" << endl;
+    out << ":start tracks:" << Qt::endl;
+    out << "    show tracks = " << showTracks << Qt::endl;
+    out << "    photons = " << showPhotonTracks << Qt::endl;
+    out << "    electrons = " << showElectronTracks << Qt::endl;
+    out << "    positrons = " << showPositronTracks << Qt::endl;
+    out << ":stop tracks:" << Qt::endl;
 
-    out << ":start overlay:" << endl;
-    out << "    show axis = " << showAxes << endl;
-    out << "    show axis labels = " << showAxesLabels << endl;
-    out << "    show regions = " << showRegionsCheckbox->isChecked() << endl;
-    out << ":stop overlay:" << endl;
+    out << ":start overlay:" << Qt::endl;
+    out << "    show axis = " << showAxes << Qt::endl;
+    out << "    show axis labels = " << showAxesLabels << Qt::endl;
+    out << "    show regions = " << showRegionsCheckbox->isChecked() << Qt::endl;
+    out << ":stop overlay:" << Qt::endl;
 
-    out << ":start dose:" << endl;
-    out << "    alpha = " << slider_dose->value() << endl;
-    out << ":stop dose:" << endl;
+    out << ":start dose:" << Qt::endl;
+    out << "    alpha = " << slider_dose->value() << Qt::endl;
+    out << ":stop dose:" << Qt::endl;
 
     if (rp.material_colors.size() > 0) {
-        out << ":start material colors:" << endl;
+        out << ":start material colors:" << Qt::endl;
         for (size_t i=0; i<rp.material_colors.size(); ++i) {
-            out << "    :start material:" << endl;
+            out << "    :start material:" << Qt::endl;
             if (i==size_t(nmed)) {
-                out << "        material = vacuum" << endl;
+                out << "        material = vacuum" << Qt::endl;
             }
             else {
-                out << "        material = " << g->getMediumName(i) << endl;
+                out << "        material = " << g->getMediumName(i) << Qt::endl;
             }
-            out << "        rgb = " << qRed(m_colors[i]) << " "
-                << qGreen(m_colors[i]) << " "
-                << qBlue(m_colors[i]) << endl;
-            out << "        alpha = " << qAlpha(m_colors[i]) << endl;
-            out << "    :stop material:" << endl;
+            out << "        rgb = " << m_colors[i].red() << " "
+                << m_colors[i].green() << " "
+                << m_colors[i].blue() << Qt::endl;
+            out << "        alpha = " << m_colors[i].alpha() << Qt::endl;
+            out << "    :stop material:" << Qt::endl;
         }
-        out << ":stop material colors:" << endl;
+        out << ":stop material colors:" << Qt::endl;
     }
 
-    out << ":start clipping planes:" << endl;
+    out << ":start clipping planes:" << Qt::endl;
     for (int i=0; i<cplanes->numPlanes(); i++) {
         QTableWidgetItem *itemAx = cplanes->getItem(i,0),
                           *itemAy = cplanes->getItem(i,1),
@@ -558,27 +558,27 @@ void GeometryViewControl::saveConfig() {
                             *itemD = cplanes->getItem(i,3),
                              *itemApplied = cplanes->getItem(i,4);
 
-        out << "    :start plane:" << endl;
+        out << "    :start plane:" << Qt::endl;
         if (itemAx) {
-            out << "        ax = " << itemAx->text() << endl;
+            out << "        ax = " << itemAx->text() << Qt::endl;
         }
         if (itemAy) {
-            out << "        ay = " << itemAy->text() << endl;
+            out << "        ay = " << itemAy->text() << Qt::endl;
         }
         if (itemAz) {
-            out << "        az = " << itemAz->text() << endl;
+            out << "        az = " << itemAz->text() << Qt::endl;
         }
         if (itemD) {
-            out << "        d = " << itemD->text() << endl;
+            out << "        d = " << itemD->text() << Qt::endl;
         }
         if (itemApplied) {
-            out << "        applied = " << itemApplied->checkState() << endl;
+            out << "        applied = " << itemApplied->checkState() << Qt::endl;
         }
-        out << "    :stop plane:" << endl;
+        out << "    :stop plane:" << Qt::endl;
     }
-    out << ":stop clipping planes:" << endl;
+    out << ":stop clipping planes:" << Qt::endl;
 
-    out << ":start hidden regions:" << endl;
+    out << ":start hidden regions:" << Qt::endl;
     out << "    region list =";
     for (size_t i = 0; i < show_regions.size(); ++i) {
         // List all the unchecked regions
@@ -589,30 +589,30 @@ void GeometryViewControl::saveConfig() {
             }
         }
     }
-    out << endl;
-    out << ":stop hidden regions:" << endl;
+    out << Qt::endl;
+    out << ":stop hidden regions:" << Qt::endl;
 
-    out << ":start colors:" << endl;
+    out << ":start colors:" << Qt::endl;
     out << "    background = " << backgroundColor.red() << " " <<
         backgroundColor.green() << " " <<
-        backgroundColor.blue() << endl;
+        backgroundColor.blue() << Qt::endl;
     out << "    text = " << textColor.red() << " " <<
         textColor.green() << " " <<
-        textColor.blue() << endl;
+        textColor.blue() << Qt::endl;
     out << "    axis = " << axisColor.red() << " " <<
         axisColor.green() << " " <<
-        axisColor.blue() << endl;
+        axisColor.blue() << Qt::endl;
     out << "    photons = " << photonColor.red() << " " <<
         photonColor.green() << " " <<
-        photonColor.blue() << endl;
+        photonColor.blue() << Qt::endl;
     out << "    electrons = " << electronColor.red() << " " <<
         electronColor.green() << " " <<
-        electronColor.blue() << endl;
+        electronColor.blue() << Qt::endl;
     out << "    positrons = " << positronColor.red() << " " <<
         positronColor.green() << " " <<
-        positronColor.blue() << endl;
-    out << "    energy scaling = " << energyScaling << endl;
-    out << ":stop colors:" << endl;
+        positronColor.blue() << Qt::endl;
+    out << "    energy scaling = " << energyScaling << Qt::endl;
+    out << ":stop colors:" << Qt::endl;
 }
 
 void GeometryViewControl::loadConfig() {
@@ -1708,8 +1708,6 @@ void GeometryViewControl::changeAmbientLight(int alight) {
 
 void GeometryViewControl::changeTransparency(int t) {
     int med = materialCB->currentIndex();
-    QRgb c = m_colors[med];
-    m_colors[med] = qRgba(qRed(c), qGreen(c), qBlue(c), t);
 #ifdef VIEW_DEBUG
     egsWarning("In changeTransparency(%d): set color to %d\n",t,m_colors[med]);
 #endif
@@ -2018,7 +2016,7 @@ int GeometryViewControl::setGeometry(
 
     // first save user's current material settings if reloading
     int nSave = materialCB->count();
-    QRgb *saveColors  = new QRgb[nSave];
+    QColor *saveColors  = new QColor[nSave];
     QString *saveName = new QString[nSave];
     QString saveCurrent = materialCB->currentText();
     if (justReloading && m_colors) {
@@ -2049,7 +2047,7 @@ int GeometryViewControl::setGeometry(
 
     // set up material combo box items
     materialCB->clear();
-    m_colors = new QRgb [nmed+1]; // nmed+1 for vacuum
+    m_colors = new QColor [nmed+1]; // nmed+1 for vacuum
     for (int j=0; j<nmed; j++) {
         materialCB->insertItem(j,g->getMediumName(j));
     }
@@ -2412,10 +2410,10 @@ void GeometryViewControl::updateView(bool transform) {
 
     rp.material_colors = vector<EGS_MaterialColor>();
     for (int j=0; j<=nmed; j++) {
-        EGS_Float r = ((EGS_Float) qRed(m_colors[j]))/255.;
-        EGS_Float gr = ((EGS_Float) qGreen(m_colors[j]))/255.;
-        EGS_Float b = ((EGS_Float) qBlue(m_colors[j]))/255.;
-        EGS_Float alpha = ((EGS_Float) qAlpha(m_colors[j]))/255.;
+        EGS_Float r = ((EGS_Float)(m_colors[j].red()))/255.;
+        EGS_Float gr = ((EGS_Float)(m_colors[j].green()))/255.;
+        EGS_Float b = ((EGS_Float)(m_colors[j].blue()))/255.;
+        EGS_Float alpha = ((EGS_Float)(m_colors[j].alpha()))/255.;
         rp.material_colors.push_back(EGS_MaterialColor(EGS_Vector(r,gr,b),alpha));
     }
 
@@ -2490,7 +2488,7 @@ void GeometryViewControl::updateView(bool transform) {
 }
 
 void GeometryViewControl::updateColorLabel(int med) {
-    transparency->setValue(qAlpha(m_colors[med]));
+    transparency->setValue((m_colors[med].alpha()));
 }
 
 void GeometryViewControl::changeColor() {
@@ -2499,14 +2497,15 @@ void GeometryViewControl::changeColor() {
     egsWarning(" widget size = %d %d\n",width(),height());
 #endif
     int med = materialCB->currentIndex();
-    bool ok;
-    QRgb newc = QColorDialog::getRgba(m_colors[med],&ok,this);
+    bool ok = true;
+    //QRgb newc = QColorDialog::getRgba(m_colors[med],&ok,this);
+    QColor newc = QColorDialog::getColor(m_colors[med],nullptr,"", QColorDialog::ShowAlphaChannel);
     if (ok) {
         m_colors[med] = newc;
         QPixmap pixmap(10,10);
         pixmap.fill(m_colors[med]);
         materialCB->setItemIcon(med, pixmap);
-        transparency->setValue(qAlpha(newc));
+        transparency->setValue((newc.alpha()));
         if (allowRegionSelection) {
             updateRegionTable(med);
         }

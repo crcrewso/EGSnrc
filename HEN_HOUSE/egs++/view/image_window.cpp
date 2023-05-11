@@ -375,7 +375,7 @@ void ImageWindow::paintEvent(QPaintEvent *) {
                 egsFatal("ImageWindow::paintEvent: Too many iterations were required! Input may be invalid, or consider increasing loopMax.");
                 return;
             }
-            int wmax = p.fontMetrics().width(mxstring);
+            int wmax = p.fontMetrics().horizontalAdvance(mxstring);
             if (wmax < 41) {
                 break;
             }
@@ -579,7 +579,7 @@ void ImageWindow::wheelEvent(QWheelEvent *event) {
     egsWarning("  Buttons: %0x\n", event->buttons());
 #endif
     startTransformation();
-    emit cameraZooming(event->delta()/20);
+    emit cameraZooming(event->angleDelta().y()/20);
 }
 
 void ImageWindow::keyPressEvent(QKeyEvent *event) {
