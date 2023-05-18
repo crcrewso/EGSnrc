@@ -258,7 +258,7 @@ void QInstallPage::printProgress( const QString& message, bool new_line )
 {
   if ( config_file->isOpen() ){
     if (new_line)
-       config_log << message << endl;
+       config_log << message << Qt::endl;
     else
        config_log << message;
     config_file->flush();
@@ -342,7 +342,7 @@ QString QInstallPage::readFile2QString( const QString& fname,
     QFile* the_file = new QFile( fname  );
     if ( ! the_file->open( QIODevice::ReadOnly  ) ){
         printProgress( err );
-        return QString::null;
+        return QString();
     }
     QTextStream the_stream;
     the_stream.setDevice( the_file );
@@ -373,7 +373,7 @@ bool QInstallPage::appendQString2File( const QString& the_string, const QString&
        return false;
     QTextStream the_stream;
     the_stream.setDevice( the_file );
-    the_stream << the_string << endl;
+    the_stream << the_string << Qt::endl;
     the_file->close();
     return true;
 }

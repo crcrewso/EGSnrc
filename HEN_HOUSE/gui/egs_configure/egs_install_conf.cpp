@@ -225,7 +225,7 @@ void QInstallPage::create_egs_c_utils(){
      for (int itask=0; itask < task_f.size(); itask++){
          task[itask].setFName(egsLibDir + task_f[itask]);
          task[itask].setDeleteFlag( false );
-         task[itask].setProgram( QString::null );
+         task[itask].setProgram( QString() );
          task[itask].setTaskName( task_q[itask] );
          task[itask].setLanguage( "C" );
 #ifdef WIN32
@@ -334,7 +334,7 @@ void QInstallPage::test_c_utils(){
              this, SLOT( get_test_c_utils_result()));
 
     ct->setTitle( (QString)"\n\nTesting the C utilities object file ... " );
-    ct->setEndStr( QString::null );
+    ct->setEndStr( QString() );
     ct->setCompilers( fc,  cc );
     ct->reset();
     Tasks* task = new Tasks();
@@ -434,7 +434,7 @@ void QInstallPage::test_load_beamlib(){
     /**********************************************************************/
 
      ct->setTitle( (QString)"\n\nGuessing library needed for dlopen ... " );
-     ct->setEndStr( QString::null );
+     ct->setEndStr( QString() );
      ct->setCompilers( fc,  cc );
      ct->reset();
      ct->setTasks( task );
@@ -1066,7 +1066,7 @@ void QInstallPage::append_vculib_dosxyz_spec(bool load_vculib_ok){
   printProgress( "\n===> Appending VCU library to dosxyznrc_" +
                  my_machine() + ".spec ...", false);
   if (load_vculib_ok){
-     QString vcuobject = QString::null;
+     QString vcuobject = QString();
      if ( fileExists( egsLibDir + QDir::separator() + tr("load_vculib.o")) ){
         vcuobject = tr("$(EGS_LIBDIR)")+tr("load_vculib.o");
      }

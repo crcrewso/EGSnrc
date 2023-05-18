@@ -396,7 +396,7 @@ if( lRes == ERROR_SUCCESS ){
             *msg += (QString)"Error code (GetLastError): " + tmp.setNum(err,10) + (QString)"\n";
             *msg += (QString)"Return value: " + tmp.setNum(llres,10) + (QString)"\n";
             *msg += (QString)"Value of lpcbData: " + tmp.setNum(lpcbData,10) + (QString)"\n";
-            return QString::null;
+            return QString();
         }
     }
     else {
@@ -407,7 +407,7 @@ return (QString)((char*)lpData);
 #else
   /* Dummy statement to avoid warnings on Linux*/
   *msg = var;
-return QString::null;
+return QString();
 #endif
 }
 
@@ -659,7 +659,7 @@ void Tasks::createFfile( unsigned int iEle )
 
     QFile f_file( fname );
     if (!f_file.open( QIODevice::WriteOnly  ) ){
-	cout << "Error creating file" << fname.toLatin1().data() << endl;
+	cout << "Error creating file" << fname.toLatin1().data() << Qt::endl;
 	return;
     }
     QTextStream to_disk( &f_file );
@@ -1240,7 +1240,7 @@ void MTest::setIDs(){
             id[t[iTask].fortranName().remove((QString)".f")] = iTask;
           }
        }
-// cout << "Task name = " << t[iTask].taskName().toLatin1().data() << " has " <<  t[iTask].getArg().count() << " arguments ..." << endl; EMH_DEBUG
+// cout << "Task name = " << t[iTask].taskName().toLatin1().data() << " has " <<  t[iTask].getArg().count() << " arguments ..." << Qt::endl; EMH_DEBUG
      }
 
 }
@@ -1396,7 +1396,7 @@ void MTest::launch(){
 
  if ( m_exit ){
   ioDevice->insertPlainText( "\n\n**** TESTS CANCELLED BY USER ****\n\n");
-   config_log << "\n\n**** TESTS CANCELLED BY USER ****\n\n" << endl;
+   config_log << "\n\n**** TESTS CANCELLED BY USER ****\n\n" << Qt::endl;
    config_log.flush();
    return;
  }
@@ -1407,7 +1407,7 @@ void MTest::launch(){
  if ( currentTask == 0 ){
     ioDevice->insertPlainText( title );
     ioDevice->insertPlainText( lineBrk );
-    config_log << title << endl;
+    config_log << title << Qt::endl;
     config_log.flush();
  }
 
@@ -1428,7 +1428,7 @@ void MTest::launch(){
  else{
   if ( ! endStr.isEmpty() ){
     ioDevice->insertPlainText( endStr );
-    config_log << endStr << endl;;
+    config_log << endStr << Qt::endl;;
     config_log.flush();
    }
 
@@ -1470,7 +1470,7 @@ void MTest::setObjDir( const QString& od ){
 QStringList setObjectFileExtensions( const QString& objnames,
                                      const QString& objdir ){
 
-    QStringList the_objects = objnames.split(" ", QString::SkipEmptyParts);
+    QStringList the_objects = objnames.split(" ", Qt::SkipEmptyParts);
     QStringList the_real_objs;
 
 
@@ -1520,7 +1520,7 @@ QStringList MTest::getCompilerArguments( Tasks* tT ){
     if (compiler->name().isEmpty()){//no compiler, skip test
      config_log << "\nBEWARE:\n-------\n -> empty " <<
                   tT->getLanguage().toUpper() << " compiler ..." <<
-                  "\n Compilation process will fail!!!"<< endl;
+                  "\n Compilation process will fail!!!"<< Qt::endl;
     }
 
     QString task_option = tT->compilerOptions();
@@ -1547,7 +1547,7 @@ QStringList MTest::getCompilerArguments( Tasks* tT ){
     }
 #endif
 
-    QStringList the_options = option.split(" ", QString::SkipEmptyParts );
+    QStringList the_options = option.split(" ", Qt::SkipEmptyParts );
     for ( QStringList::Iterator it = the_options.begin();
                                 it != the_options.end(); ++it ) {
         the_args << *it;
@@ -1562,7 +1562,7 @@ QStringList MTest::getCompilerArguments( Tasks* tT ){
     }
 
 
-    QStringList the_libs = tT->libraries().split( " ", QString::SkipEmptyParts);
+    QStringList the_libs = tT->libraries().split( " ", Qt::SkipEmptyParts);
     for ( QStringList::Iterator itl = the_libs.begin();
                                 itl != the_libs.end(); ++itl ){
 #ifdef WIN32
@@ -1582,7 +1582,7 @@ QStringList MTest::getCompilerArguments( Tasks* tT ){
     }
 
     if ( ! linkerOptions.isEmpty() ){
-       QStringList linker_options = linkerOptions.split( " ", QString::SkipEmptyParts);
+       QStringList linker_options = linkerOptions.split( " ", Qt::SkipEmptyParts);
        for ( QStringList::Iterator lo = linker_options.begin();
                                    lo != linker_options.end(); ++lo )
             the_args << *lo;
@@ -1627,15 +1627,15 @@ void MTest::compile(){
   t[ currentTask ].createFfile( compileTimes );
   QStringList the_args = getCompilerArguments( &t[ currentTask ]  );
   QString command = the_args.takeFirst();
-// cout << "Executing " << command.toLatin1().data() << " with " << the_args.count() << " args: " << the_args.join(" : ").toLatin1().data() << endl;//EMH_DEBUG
+// cout << "Executing " << command.toLatin1().data() << " with " << the_args.count() << " args: " << the_args.join(" : ").toLatin1().data() << Qt::endl;//EMH_DEBUG
   succExe = true;
   if ( environment.isEmpty() ){
      cProc->start(command,the_args);
      if(cProc->error()==QProcess::FailedToStart){
         QString errorExe = QString("\n Could not start ") +
                            command + " " + the_args.join(" ");
-        cout       << errorExe.toLatin1().data() << endl;
-        config_log << errorExe.toLatin1().data() << endl;
+        cout       << errorExe.toLatin1().data() << Qt::endl;
+        config_log << errorExe.toLatin1().data() << Qt::endl;
         succExe = false;
         compileTimes++;
         emit compilationFinished();
@@ -1650,8 +1650,8 @@ void MTest::compile(){
          QString errorExe = QString("\n Could not start ") +
                             command + " " + the_args.join(" ");
                  errorExe += QString("\nEnvironment : ") + environment.toStringList().join("\n");
-         cout       << errorExe.toLatin1().data() << endl;
-         config_log << errorExe << endl;
+         cout       << errorExe.toLatin1().data() << Qt::endl;
+         config_log << errorExe << Qt::endl;
          succExe = false;
          compileTimes++;
          emit compilationFinished();
@@ -1721,11 +1721,11 @@ void MTest::errDetect(int exitCode, QProcess::ExitStatus exitStatus){
     if ( exitStatus != QProcess::NormalExit ) {
         if ( m_exit  ){
             ioDevice->insertPlainText( QString("\n Task stopped by user. \n") );
-            config_log << "\n Task stopped by user with exit code: " << exitCode << endl;
+            config_log << "\n Task stopped by user with exit code: " << exitCode << Qt::endl;
         }
         else{
             ioDevice->insertPlainText(QString("\n Task failed. \n") );
-            config_log << "\n Task failed with exit code: " << exitCode << endl;
+            config_log << "\n Task failed with exit code: " << exitCode << Qt::endl;
         }
         config_log.flush();
         succComp = false;
@@ -1744,27 +1744,27 @@ void MTest::errDetect(int exitCode, QProcess::ExitStatus exitStatus){
     QStringList tArgs = t[ currentTask ].getArg();
     if ( ! tArgs.isEmpty() ){
 	if ( compileTimes < tArgs.count() )
-	    args = tArgs[ compileTimes ].split(" ", QString::SkipEmptyParts);
+	    args = tArgs[ compileTimes ].split(" ", Qt::SkipEmptyParts);
 	else
-	    args = tArgs[ tArgs.count()-1 ].split(" ", QString::SkipEmptyParts);
+	    args = tArgs[ tArgs.count()-1 ].split(" ", Qt::SkipEmptyParts);
     }
     else{
 	args.clear();
     }
     compileTimes++;
     if ( ! args.isEmpty() && succComp ){ // execution required after compilation succeeded
-//         cout << "Ready to execute with arguments: " << args.join(" : ").toLatin1().data() << endl;//EMH_DEBUG
+//         cout << "Ready to execute with arguments: " << args.join(" : ").toLatin1().data() << Qt::endl;//EMH_DEBUG
 	emit readyToExecute();
     }
     else if ( succComp ){  // no execution required after compilation succeeded, conclude task
 	compileTimes = tcompileTimes;
 	succExe = succExe && succComp;
-//         cout << "Compilation finished successfully!" << endl;//EMH_DEBUG
+//         cout << "Compilation finished successfully!" << Qt::endl;//EMH_DEBUG
 	emit compilationFinished();
     }
     else{                        // compilation failed, see if there is another step or report failure
 	succExe = succExe && succComp;
-//         cout << "Compilation failed!" << endl;//EMH_DEBUG
+//         cout << "Compilation failed!" << Qt::endl;//EMH_DEBUG
 	emit compilationFinished();
     }
 
@@ -1790,7 +1790,7 @@ void MTest::execute(){
 	    // error handling
 	    QString errorExe = QString("\n Could not execute ") +
                                command + QString(" ") + the_arg.join(" ");
-	    cout << errorExe.toLatin1().data() << endl;
+	    cout << errorExe.toLatin1().data() << Qt::endl;
 	    ioDevice->insertPlainText( errorExe );
             emit criticalError();
 	}
@@ -1848,7 +1848,7 @@ void MTest::executionStatus(int exitCode, QProcess::ExitStatus exitStatus){
   QString Exe = QString("\n Exit code is ") +
                  QString("%1").arg(exitCode,0,10);
   Exe+= QString("\n Reference is ") + reference;
-  config_log <<  Exe << endl;
+  config_log <<  Exe << Qt::endl;
   config_log.flush();
 
   QString criterion = t[currentTask].checkMode();
@@ -1862,8 +1862,8 @@ void MTest::executionStatus(int exitCode, QProcess::ExitStatus exitStatus){
   }
   else if (  criterion.toLower() == "output"){
 
-    config_log << " output:" << exeOut << endl;
-    config_log << " reference:" << reference << endl;
+    config_log << " output:" << exeOut << Qt::endl;
+    config_log << " reference:" << reference << Qt::endl;
     config_log.flush();
 
     if ( exeOut != reference ){
@@ -1934,7 +1934,7 @@ XMLTestReader::XMLTestReader( const QString& xml_file ){
     xmldoc = xml_file;
     nTests = countTags(xmldoc);
     //nTests = countTags(xmldoc, "test");
-    //cout << "Running " << nTests << " tests ..." << endl;//EMH_DEBUG
+    //cout << "Running " << nTests << " tests ..." << Qt::endl;//EMH_DEBUG
 }
 
 QString XMLTestReader::getProgram( const QDomNode &n ){
@@ -1973,12 +1973,12 @@ int XMLTestReader::countTags( const QString& xml_file){
     QDomDocument doc( "the_doc" );
     QFile file( xml_file );
     if ( !file.open( QIODevice::ReadOnly ) ){
-	cout << "Could not open file " << xml_file.toLatin1().data() << endl;
+	cout << "Could not open file " << xml_file.toLatin1().data() << Qt::endl;
 	return 0;
     }
     if ( !doc.setContent( &file ) ) {
 	file.close();
-	cout << "Error in " << xml_file.toLatin1().data() << endl;
+	cout << "Error in " << xml_file.toLatin1().data() << Qt::endl;
 	return 0;
     }
     file.close();
@@ -1999,7 +1999,7 @@ int XMLTestReader::countTags( const QString& xml_file){
 	    node = node.nextSibling();
 	}
     }
-    //    cout << "Number of tasks = " << counter << endl;
+    //    cout << "Number of tasks = " << counter << Qt::endl;
     return counter;
 }
 
@@ -2017,12 +2017,12 @@ MTest* XMLTestReader::getTests( const QString& xml_name ){
   //    QFile file( "tests.xml" );
   QFile file( xml_name );
   if ( !file.open( QIODevice::ReadOnly ) ){
-    cout << "Could not open file " << xml_name.toLatin1().data() << endl;
+    cout << "Could not open file " << xml_name.toLatin1().data() << Qt::endl;
     return 0;
   }
   if ( !doc.setContent( &file ) ) {
     file.close();
-    cout << "Error in " << xml_name.toLatin1().data() << endl;
+    cout << "Error in " << xml_name.toLatin1().data() << Qt::endl;
     return 0;
   }
   file.close();
