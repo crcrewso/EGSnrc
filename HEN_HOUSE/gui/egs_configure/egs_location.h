@@ -357,7 +357,7 @@ public slots:
     if ( !QDir(dir).exists() ){
        if ( create ){ // directory can be created
           QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"),
-                       dir + tr(" does not exist! Do you want to create it?"), 0, this);
+                       dir + tr(" does not exist! Do you want to create it?"), QMessageBox::StandardButton(), this);
                    msgBox.addButton(tr("&OK"), QMessageBox::AcceptRole);
                    msgBox.addButton(tr("&Cancel"), QMessageBox::RejectRole);
            if (msgBox.exec() == QMessageBox::AcceptRole){
@@ -385,7 +385,7 @@ public slots:
           QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"),
                        tr("Working area ") + dir + tr(" exists!\n") +
                        tr(" Do you want to overwrite it?\n") +
-                       tr("Choose No to configure an existing system!"), 0, this);
+                       tr("Choose No to configure an existing system!"), QMessageBox::StandardButton(), this);
                    msgBox.addButton(tr("&Yes"), QMessageBox::AcceptRole);
                    QPushButton *noButton = msgBox.addButton(tr("&No"), QMessageBox::RejectRole);
                    msgBox.setDefaultButton(noButton);

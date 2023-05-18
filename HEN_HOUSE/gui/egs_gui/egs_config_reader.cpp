@@ -34,7 +34,7 @@
 #include <qmap.h>
 #include <qfile.h>
 #include <qstringlist.h>
-#include <qregexp.h>
+#include <QRegExp>
 #include <qdir.h>
 #include <qmessagebox.h>
 

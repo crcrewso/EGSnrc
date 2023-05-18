@@ -354,7 +354,8 @@ public:
 
     /*! \brief Get the \a j'th object */
     EGS_Object *getObject(int j) {
-        return (j>=0 && j<objects.size()) ? objects[j] : 0;
+        int compare = (int)objects.size();
+        return (j>=0 && j<compare) ? objects[j] : 0;
     };
 
 protected:

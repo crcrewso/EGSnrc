@@ -108,7 +108,7 @@ QWizardPage * EGS_Wizard::createWelcomePage(){
    guyLabel->setPixmap( QPixmap(":/images/the_guy_measures_flipped.png").scaled(QSize(200,200),
                         Qt::IgnoreAspectRatio,Qt::SmoothTransformation)
    );
-   QHBoxLayout *hl = new QHBoxLayout(welcomePage); hl->setSpacing(30); hl->setMargin(11);
+   QHBoxLayout *hl = new QHBoxLayout(welcomePage); hl->setSpacing(30); hl->setContentsMargins(11, 11, 11, 11);
    QLabel *textLabel = new QLabel(welcomePage);
    textLabel->setFrameStyle(QFrame::StyledPanel || QFrame::Sunken);
    textLabel->setMargin(10); textLabel->setAutoFillBackground(true);
